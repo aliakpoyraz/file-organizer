@@ -1,0 +1,31 @@
+options:
+  conflict_strategy: rename
+  date_basis: modified
+  recursive: false
+
+rules:
+  - name: images
+    extensions: [jpg, jpeg, png, gif]
+    destination: "{source}/Images/{year}/{month}"
+    date_bucket: true
+    priority: 10
+
+  - name: documents
+    extensions: [pdf, txt, md]
+    destination: "{source}/Documents"
+    priority: 10
+
+  - name: big-zip
+    extensions: [zip]
+    min_size: 1024
+    destination: "{source}/Archives/large"
+    priority: 20
+
+  - name: screenshots
+    match_regex: "^Screenshot.*"
+    destination: "{source}/Images/Screenshots"
+    priority: 30
+
+  - name: by-size-fallback
+    destination: "{source}/Other/{size_bucket}"
+    priority: 0

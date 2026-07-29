@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "file-organizer"
+version = "0.1.0"
+description = "A configurable CLI to organize files into folders using rules."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "file-organizer contributors" }]
+dependencies = [
+    "click>=8.1",
+    "PyYAML>=6.0",
+    "watchdog>=3.0",
+    "questionary>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4",
+    "pytest-cov>=4.1",
+]
+
+[project.scripts]
+file-organizer = "file_organizer.cli:main"
+forg = "file_organizer.cli:main"
+fo = "file_organizer.interactive:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "--cov=file_organizer --cov-report=term-missing --cov-fail-under=80"
+testpaths = ["tests"]

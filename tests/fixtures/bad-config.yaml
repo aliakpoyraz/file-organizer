@@ -1,0 +1,7 @@
+options:
+  conflict_strategy: rename
+
+rules:
+  - name: broken
+    match_regex: "([unclosed"
+    destination: "{source}/Broken"

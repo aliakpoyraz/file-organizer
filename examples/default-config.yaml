@@ -1,0 +1,40 @@
+options:
+  dry_run: false
+  watch: false
+  undo_log: .file-organizer-undo.jsonl
+  conflict_strategy: rename
+  follow_symlinks: false
+  date_basis: modified
+  recursive: false
+
+rules:
+  - name: images
+    extensions: [jpg, jpeg, png, gif, heic]
+    destination: "{source}/Images/{year}/{month}"
+    date_bucket: true
+    priority: 10
+
+  - name: documents
+    extensions: [pdf, doc, docx, txt, md]
+    destination: "{source}/Documents"
+    priority: 10
+
+  - name: video
+    extensions: [mp4, mov, mkv]
+    destination: "{source}/Video"
+    priority: 10
+
+  - name: large-archives
+    extensions: [zip, tar, gz]
+    min_size: 104857600
+    destination: "{source}/Archives/large"
+    priority: 20
+
+  - name: screenshots
+    match_regex: "^Screenshot.*"
+    destination: "{source}/Images/Screenshots"
+    priority: 30
+
+  - name: by-size-fallback
+    destination: "{source}/Other/{size_bucket}"
+    priority: 0
